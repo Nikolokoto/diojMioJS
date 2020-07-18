@@ -267,27 +267,35 @@ for(let i=0 ; i<array.length ; i++){
    * ¡Las flores han germinado!: 🌷🌷🌷🌷🌻🌻🌻🌸🌸🌸🌸🌸
    */
 
-let floweraAndSeedling = prompt("Ingrese primero alguna flor (girasol, orquidea, clavel, jazmin) y luego sus plántulas (escriba plant)");
-const array = floweraAndSeedling.split(' ');
-
-try{
-    if(array[0]!=="girasol" || array[0]!=="orquidea" || array[0]!=="clavel" || array[0]!=="jazmin"){
-    throw new Error ("No empieza con alguna flor. Nada va a germinar aquí");      
-    } 
-}catch(err){
-    alert(err);
-}
-
-
-for (let i = 0 ; array.lenght < i ; i++){
-    if(array[i]==="plant"){
-        array[i]===array[i-1];
-    } else {
-        array[i]===array[i];
-    }
-}
-
-console.log(array.join(' '));
+  let floweraAndSeedling = prompt("Ingrese primero alguna flor (girasol, orquidea, clavel, jazmin) y luego sus plántulas");
+  const array = floweraAndSeedling.split(' ');
+  
+  
+  try{
+      if(array[0]!=="girasol" && array[0]!=="orquidea" && array[0]!=="clavel" && array[0]!=="jazmin"){
+      throw new Error ("No empieza con alguna flor. Nada va a germinar aquí");      
+      } 
+  }catch(err){
+      alert(err);
+  }
+  
+  let germinating = [];
+  let flower = "thatString";
+  let germinatingFlower = "anotherString";
+  
+  for (let i = 0 ; array.lenght < i ; i++){
+      if(array[i]==="girasol" || array[i]==="orquidea" || array[i]==="clavel" || array[i]==="jazmin"){
+          flower = array[i]
+          console.log(flower);
+          germinating.push(flower);
+      } else {
+          array[i] = array[i-1];
+          germinatingFlower = array[i]
+          germinating.push(germinatingFlower);
+      }
+  
+      console.log(germinating);
+  }
 
 
    // 12
