@@ -47,15 +47,17 @@ orderWord();
 const printTitle = () => {
     let phrase = prompt("Escriba una frase. Este programa la imprime en modo título (las primeras letras de cada palabra en mayúsculas");
     let word = phrase.split(' ');
+    let newPhrase = [];
+
     for (let i=0 ; i<word.length ; i++){
         firstLetter = word[i][0];
+        let withoutFirstLetter = word[i].slice(1);
         upperCase = firstLetter.toUpperCase();
-        let newWord = upperCase + (word-firstLetter);
-        console.log(newWord);
+        let newWord = upperCase + withoutFirstLetter;
+        newPhrase.push(newWord);
     }
-
-    title = newWord.join(' ');
-    console.log(title);
+   title = newPhrase.join(' ');
+   console.log(title);
 }
 
 printTitle();
