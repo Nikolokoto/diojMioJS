@@ -283,19 +283,17 @@ for(let i=0 ; i<array.length ; i++){
   let flower = "thatString";
   let germinatingFlower = "anotherString";
   
-  for (let i = 0 ; array.lenght < i ; i++){
-      if(array[i]==="girasol" || array[i]==="orquidea" || array[i]==="clavel" || array[i]==="jazmin"){
-          flower = array[i]
-          console.log(flower);
-          germinating.push(flower);
-      } else {
-          array[i] = array[i-1];
-          germinatingFlower = array[i]
-          germinating.push(germinatingFlower);
-      }
-  
-      console.log(germinating);
-  }
+  for (let i = 0 ; array.length < i ; i++){
+    if(array[i]==="girasol" || array[i]==="orquidea" || array[i]==="clavel" || array[i]==="jazmin"){
+        flower = array[i]
+        console.log(flower);
+        germinating.push(flower);
+    } else {
+       germinating.push(flower); // Aca ya se cual es la planta, porque la ultima vez que la encontre la puse en la variable flower
+    }
+
+    console.log(germinating);
+}
 
 
    // 12

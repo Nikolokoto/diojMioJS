@@ -52,9 +52,9 @@ const printTitle = () => {
     for (let i=0 ; i<word.length ; i++){
         firstLetter = word[i][0];
         let withoutFirstLetter = word[i].slice(1);
-        upperCase = firstLetter.toUpperCase();
-        let newWord = upperCase + withoutFirstLetter;
-        newPhrase.push(newWord);
+        upperCaseLetter = firstLetter.toUpperCase();
+        let upperCaseWord = upperCaseLetter + withoutFirstLetter;
+        newPhrase.push(upperCaseWord);
     }
    title = newPhrase.join(' ');
    console.log(title);

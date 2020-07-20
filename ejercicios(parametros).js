@@ -6,15 +6,21 @@
  * indexOf o findIndex
  *  
  ***********************************************/
-const countVowels = (vowels) => {
-    const phrase = prompt("CONTADOR DE VOCALES - Escriba una frase:");
-    const vowels = phrase.find(vowel => vowel === "a" && "e" && "i" && "o" && "u");//Me dice que tengo que declarar "vowels", pero se supone que lo estoy haciendo en la siguiente línea
-    vowels();
-    console.log =(vowels());
+const countVowels = phrase => {
+    const spelling = phrase.split('');
+    let count = 0;
+
+    spelling.forEach(letters => {
+        const vowels = ["a", "e", "i", "o", "u"];
+        if (vowels.indexOf(letters) > -1){
+            count ++;
+        }        
+    });
+    console.log(count);
 }
 
-countVowels();
-
+let input = prompt("CONTADOR DE VOCALES - Escriba una frase:");
+countVowels(input);
 
  // 2
  /***********************************************
@@ -27,19 +33,26 @@ countVowels();
  *  
  ***********************************************/
 
- const deleteLetter = eliminateCharacter => {
-     const phrase = prompt("ELIMINAR CARACTER - Escriba una frase:");
-     const character = prompt("¿Qué caracter desea borrar?");
-     try{
-         validation = character.split('');
-         validation.length -1 < 1;
-         throw new Error("No se puede eliminar más de uno.")
-     } catch(err) {
-         alert(err);
+const deleteCharacter = (phrase, toDelete) => {
+    let charactersPhrase = phrase.split('');
+    let validationToDelete = toDelete.split('');
+    try {
+        if(validationToDelete.length > 2){
+            throw new Error ("Sólo se puede borrar un caracter");      
+        } 
+    }catch(err){
+        alert(err);
+      }
+    
+    const print = [];
+    charactersPhrase.forEach(characters => {
+        if(characters!==toDelete){
+            print.push(characters)
         }
+    });
+    console.log(print.join(''));
+}
 
-    eliminateCharacter(() => phrase.find(letter => letter === character));
-    console.log(phrase - deleteLetter)
- }
-
- deleteLetter();
+let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");
+let character = prompt("2. ¿Qué caracter desea eliminar de la frase?");
+Character(input, character);
