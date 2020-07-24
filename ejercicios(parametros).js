@@ -35,24 +35,61 @@ countVowels(input);
 
 const deleteCharacter = (phrase, toDelete) => {
     let charactersPhrase = phrase.split('');
-    let validationToDelete = toDelete.split('');
     try {
-        if(validationToDelete.length > 2){
+        let validationToDelete = toDelete.split('');
+        if(ToDelete.length > 2){
             throw new Error ("Sólo se puede borrar un caracter");      
         } 
     }catch(err){
         alert(err);
       }
     
-    const print = [];
-    charactersPhrase.forEach(characters => {
-        if(characters!==toDelete){
-            print.push(characters)
-        }
+    const toFind = charactersPhrase.find(character => {
+        character!==toDelete
     });
-    console.log(print.join(''));
+
+    print = [];
+    if (toFind===true){
+        print.push(toFind);
+        console.log(print.join(''));
+    } 
 }
 
 let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");
-let character = prompt("2. ¿Qué caracter desea eliminar de la frase?");
-Character(input, character);
+let characterToDelete = prompt("2. ¿Qué caracter desea eliminar de la frase?");
+deleteCharacter(input, characterToDelete);
+
+////
+
+const deleteCharacter = (phrase, toDelete) => {
+    let charactersPhrase = phrase.split('');
+    console.log(charactersPhrase);
+    
+    const checkToDelete = () => {
+        let spellToDelete = toDelete.split('');
+
+        try {  
+            if(spellToDelete.length > 1){
+                throw new Error ("Sólo se puede borrar un caracter");
+            } 
+            
+        }catch(err){
+            alert(err);
+        }
+    }
+    
+    print = [];
+
+    const toFind = charactersPhrase.forEach(character => {
+        if(character===checkToDelete){
+         print.push(toFind);
+            console.log(print.join(''));
+        }else {
+        console.log(`Caracter eliminado: ${toFind}`); 
+         }     
+    });
+}
+
+let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");
+let characterToDelete = prompt("2. ¿Qué caracter desea eliminar de la frase?");
+deleteCharacter(input, characterToDelete);

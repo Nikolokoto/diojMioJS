@@ -50,11 +50,7 @@ saveUser();
  ************************************************/
 
 const listForName = (usersList) => {
-    const usersNames = [];
-    usersList.map(user => {
-        usersNames.push(user[0]);
-        return usersNames
-    });
+    const usersNames = usersList.map(user => usersNames.push(user[0]));
     console.log(usersNames)
 }
 
@@ -93,50 +89,20 @@ findForMail(actualList);
  *    personas por nombre o parte del nombre.
  ************************************************/
 
-//INTENTO 1
-
 const findForName = usersList => {
     const inputName = prompt("Escriba el nombre completo o parte del nombre");
-    /*let spellingInput = inputName.split('');
-    console.log(spellingInput); // quizá este paso es innecesario*/
     
-    const allNames = [];
-    searchNames = usersList.map(user => {
-        user[0].forEach(name => { // no entiende que quiero ejecutar en "user" en posición [0]
-            name.split('');
-        });
-        return allnames.push(searchNames);
-    });
-    console.log(allNames);  // no funciona :(
+    const allNames = usersList.map(user => user[0]);
+    console.log(allNames);//nuevo array con los nombres
 
-    /**
-    let spellingNames = [];
-    allNames.map(name => {
-        const lettersName = name.split('');
-        spellingNames.push(lettersName);
-        return spellingNames;
-    });
-    console.log(spellingNames);  // quizá este paso es innecesario*/
-
-    const userFindForName = [];
-    const repeatLetter = allNames.find(name => {
-        if(allnames[name][0]===inputName[0] && letters[name][1]===inputName[1] &&
-        letters[name][2]===inputName[2] && letters[name][3]===inputName[3])
-        return repeatLetter;
-    });
-    console.log(repeatLetter); // ni idea qué pasa acá
-
-    if(repeatLetter===true){
-        userFindForName.push(allNames[name]);
-        console.log(userFindForName); 
-
-        print = usersList.find(user => user===userFindForName)
-        if (print===true){
-            console.log[print];
-        }
+    const idxFindForName = allnames.findIndex(name => name.indexOf(inputName) !== -1)
+        
+    if(idxFindForName){
+        print = usersList.find(user => user===idxFindForName)
+        console.log[print];
     }else{
-        console.log("Ningún nombre o parte del nombre de usuario corresponde con los registrados :(");
-    } 
+        console.log("Ningún nombre o parte del nombre de usuarix corresponde con los registrados :(");
+    }   
 }  
 
 const actualList = [
@@ -147,27 +113,22 @@ const actualList = [
 
 findForName(actualList);
 
-//INTENTO 2
+
+//Y si quiero encontrar TODXS lxs usuarixs que coinciden con el input????
+//Este fue mi intento fallido:
 
 const findForName = usersList => {
     const inputName = prompt("Escriba el nombre completo o parte del nombre");
+    const findUser = []; //Para guardar todos los nombres de usuarios que coinciden con la búsqueda
+    
+    const allNames = usersList.map(user => user[0]);
 
-const userFindForName = [];
-    const repeatLetter = usersList.find(user => {
-        if(usersList[user][0][0]===inputName[0] && usersList[user][0][1]===inputName[1] && // no entiende que quiero ejecutar en "user" en posición [0]
-        usersList[user][0][2]===inputName[2] && usersList[user][0][3]===inputName[3])
-        return repeatLetter;
-    });
-    console.log(repeatLetter); // no funciona
-
-    if(repeatLetter===true){
-        userFindForName.push(repeatLetter);
-        console.log(userFindForName);
-
-        print = usersList.find(user => user===userFindForName)
-        if (print===true){
-            console.log[print];
-        }
+    const indexOfFindName = allNames.findIndex(name => name.indexOf(inputName));//Esto no funciona :( Me devuelve de hecho un nombre que nada que wer
+    console.log(indexOfFindName);
+        
+    if(indexOfFindName!==-1){
+        findUser.push(usersList[indexOfFindName]);
+        console.log(findUser);//
     }else{
         console.log("Ningún nombre o parte del nombre de usuario corresponde con los registrados :(");
     }
@@ -176,7 +137,8 @@ const userFindForName = [];
 const actualList = [
     ["niko gutierrez", "30", "niko@email.com"],
     ["joan villanueva", "28", "joan@email.com"],
-    ["katia crimson", "27", "katia@email.com"]
+    ["katia crimson", "27", "katia@email.com"],
+    ["joancita"]
 ];
 
 findForName(actualList);
@@ -185,12 +147,24 @@ findForName(actualList);
  * 5. Hacer una función para borrar personas por mail. / splice
  ************************************************/
 const deleteUser = usersList => {
-    const toDelete = prompt(`Ingrese el índice del usuario para eliminar:
-                            ${usersList}`);
+    const toDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
     
-    usersList.find(users => {
-        
-    })
+    const mailsList = usersList.map(user => user[2]);
+    console.log(mailsList)
+
+    const mailToDelete = mailsList.findIndex(mail => mail===toDelete);
+    mailsList.splice(mailToDelete,1);
+    console.log(mailsList); //
+    
+    const newUsersList = [];
+    const checkMails = usersList.map(user => user[2]!==mailToDelete);
+        if(checkMails===true){
+          newUsersList.push(mailsList);
+          console.log(newUsersList)  
+        }else{
+            usersList[2].splice(checkMails);
+        }
+    console.log(newUsersList);
 }
 
 const actualList = [
