@@ -11,6 +11,41 @@
  * de nuestro carrito. 
  */
 
+const catalogue = {
+    productList: [],
+    checkFields: ["title", "description", "price"],
+    searchID: function(id) {
+     return this.productList.findIndex(product => id === product.id);   
+    },
+    checkID: function(id) {
+        const index = this.searchID(id);
+        if(index !== -1) throw new Error("El ID ya existe en el catalogo.");
+    },
+    addToCatalogue: function(id, title, description, price) {
+        this.checkID(id);
+        const product = {
+            id,
+            title,
+            description,
+            price
+        };
+        this.productList.push(product);
+    },
+    deleteFromCatalogue = function(id) {
+        this.productList = this.productList.filter(product => product.id !== id);
+    },
+    checkModify: function(index, field) {
+        if(index === -1) throw new Error("El ID seleccionado no existe.");
+        if(this.checkFields.indexOf(field) === -1) throw new Error("El campo seleccionado no es valido."); 
+    },
+    modify: function(id, field, value) {
+        const index = this.searchID(id);
+        this.checkModify(index, field);
+        this.productList[index][field] = value; 
+    }
+};
+
+
 
 /*************************************************
  * Crear un objeto que sea un libro, con todos 
