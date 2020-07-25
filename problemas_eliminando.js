@@ -10,34 +10,28 @@
  * sea solo uno. Si es más de uno tirar un error.
  *  
  ***********************************************/
+const checkCharacter = (character) => {
+    let spelling = character.split('');
+
+    if(spelling.length > 1) {
+        throw new Error ("Sólo se puede borrar un caracter");
+    }else{
+        return checkCharacter;
+    }
+}
 
 const deleteCharacter = (phrase, toDelete) => {
+    checkCharacter(toDelete);
     let charactersPhrase = phrase.split('');
-    console.log(charactersPhrase);
-    
-    const checkToDelete = () => {
-        let spellToDelete = toDelete.split('');
-
-        try {  
-            if(spellToDelete.length > 1){
-                throw new Error ("Sólo se puede borrar un caracter");
-            } 
-            
-        }catch(err){
-            alert(err);
+    let repeatDelete = 0;
+    const newPhrase = [];
+    const searchCharacter = charactersPhrase.map(character=>character!==toDelete)
+        if(searchCharacter===true){
+           newPhrase.push(searchCharacter);
+        }else{
+            repeatDelete++;
         }
-    }
-    
-    print = [];
-
-    const toFind = charactersPhrase.forEach(character => {
-        if(character===checkToDelete){
-         print.push(toFind);
-            console.log(print.join(''));
-        }else {
-        console.log(`Caracter eliminado: ${toFind}`); 
-         }     
-    });
+    console.log(newPhrase.join(''));
 }
 
 let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");
@@ -51,30 +45,17 @@ deleteCharacter(input, characterToDelete);
 * Hacer una función para borrar personas por mail. / splice
 ************************************************/
 const deleteUser = usersList => {
-   const toDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
-   
-   const mailsList = usersList.map(user => user[2]);
-   console.log(mailsList)
+    const toDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
 
-   const mailToDelete = mailsList.findIndex(mail => mail===toDelete);
-   mailsList.splice(mailToDelete,1);
-   console.log(mailsList); //
-   
-   const newUsersList = [];
-   const checkMails = usersList.map(user => user[2]!==mailToDelete);
-       if(checkMails===true){
-         newUsersList.push(mailsList);
-         console.log(newUsersList)  
-       }else{
-           usersList[2].splice(checkMails);
-       }
-   console.log(newUsersList);
-}
-
-const actualList = [
-   ["niko gutierrez", "30", "niko@email.com"],
-   ["joan villanueva", "28", "joan@email.com"],
-   ["katia crimson", "27", "katia@email.com"]
-];
-
-deleteUser(actualList);
+    const mailToConserve = usersList.filter(user => user[2]!==toDelete);//Este fue el método que me resultó. ¿Cómo se haría con splice??
+     
+    console.log(mailToConserve);
+ }
+ 
+ const actualList = [
+    ["niko gutierrez", "30", "niko@email.com"],
+    ["joan villanueva", "28", "joan@email.com"],
+    ["katia crimson", "27", "katia@email.com"]
+ ];
+ 
+ deleteUser(actualList);
