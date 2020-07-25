@@ -33,61 +33,28 @@ countVowels(input);
  *  
  ***********************************************/
 
-const deleteCharacter = (phrase, toDelete) => {
-    let charactersPhrase = phrase.split('');
-    try {
-        let validationToDelete = toDelete.split('');
-        if(ToDelete.length > 2){
-            throw new Error ("Sólo se puede borrar un caracter");      
-        } 
-    }catch(err){
-        alert(err);
-      }
-    
-    const toFind = charactersPhrase.find(character => {
-        character!==toDelete
-    });
+const checkCharacter = (character) => {
+    let spelling = character.split('');
 
-    print = [];
-    if (toFind===true){
-        print.push(toFind);
-        console.log(print.join(''));
-    } 
+    if(spelling.length > 1) {
+        throw new Error ("Sólo se puede borrar un caracter");
+    }else{
+        return checkCharacter;
+    }
 }
 
-let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");
-let characterToDelete = prompt("2. ¿Qué caracter desea eliminar de la frase?");
-deleteCharacter(input, characterToDelete);
-
-////
-
 const deleteCharacter = (phrase, toDelete) => {
+    checkCharacter(toDelete);
     let charactersPhrase = phrase.split('');
-    console.log(charactersPhrase);
-    
-    const checkToDelete = () => {
-        let spellToDelete = toDelete.split('');
-
-        try {  
-            if(spellToDelete.length > 1){
-                throw new Error ("Sólo se puede borrar un caracter");
-            } 
-            
-        }catch(err){
-            alert(err);
+    let repeatDelete = 0;
+    const newPhrase = [];
+    const searchCharacter = charactersPhrase.map(character=>character!==toDelete)
+        if(searchCharacter===true){
+           newPhrase.push(searchCharacter);
+        }else{
+            repeatDelete++;
         }
-    }
-    
-    print = [];
-
-    const toFind = charactersPhrase.forEach(character => {
-        if(character===checkToDelete){
-         print.push(toFind);
-            console.log(print.join(''));
-        }else {
-        console.log(`Caracter eliminado: ${toFind}`); 
-         }     
-    });
+    console.log(newPhrase.join(''));
 }
 
 let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");

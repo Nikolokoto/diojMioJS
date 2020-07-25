@@ -123,7 +123,7 @@ const findForName = usersList => {
     
     const allNames = usersList.map(user => user[0]);
 
-    const indexOfFindName = allNames.findIndex(name => name.indexOf(inputName));//Esto no funciona :( Me devuelve de hecho un nombre que nada que wer
+    const indexOfFindName = allNames.findIndex(name => name.indexOf(inputName));
     console.log(indexOfFindName);
         
     if(indexOfFindName!==-1){
@@ -148,33 +148,20 @@ findForName(actualList);
  ************************************************/
 const deleteUser = usersList => {
     const toDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
-    
-    const mailsList = usersList.map(user => user[2]);
-    console.log(mailsList)
 
-    const mailToDelete = mailsList.findIndex(mail => mail===toDelete);
-    mailsList.splice(mailToDelete,1);
-    console.log(mailsList); //
-    
-    const newUsersList = [];
-    const checkMails = usersList.map(user => user[2]!==mailToDelete);
-        if(checkMails===true){
-          newUsersList.push(mailsList);
-          console.log(newUsersList)  
-        }else{
-            usersList[2].splice(checkMails);
-        }
-    console.log(newUsersList);
-}
-
-const actualList = [
+    const mailToConserve = usersList.filter(user => user[2]!==toDelete);//Este fue el método que me resultó. ¿Cómo se haría con splice??
+     
+    console.log(mailToConserve);
+ }
+ 
+ const actualList = [
     ["niko gutierrez", "30", "niko@email.com"],
     ["joan villanueva", "28", "joan@email.com"],
     ["katia crimson", "27", "katia@email.com"]
-];
-
-deleteUser(actualList);
-
+ ];
+ 
+ deleteUser(actualList);
+ 
  /***********************************************
  * 6. Hacer una funcion que permita modificar nombre
  *    buscando por mail.

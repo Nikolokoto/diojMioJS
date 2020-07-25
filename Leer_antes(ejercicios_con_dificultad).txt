@@ -1,13 +1,12 @@
 Nota:
 
-Los ejercicios que no me funcionan en consola:
+Lista actualizada (viernes 24 de julio)
 
 11 de array
 
-3 y 4 de function2
+2 de parametros
 
-1 y 2 de parametros
+5 de integral (en realidad pude hacerlo, pero sin usar el splice. Cómo es con splice?? Lo intenté y no me daba)
 
-u_u
 
 Agradezco alguna luz de lo que estoy haciendo mal. Gracias de antemano, Fede
