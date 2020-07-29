@@ -66,9 +66,9 @@ listForName(actualList);
  * 3. Hacer una función que me permita encontrar
  *    una persona por email.
  ************************************************/
-const findForMail = usersList => {
-    const mail = prompt("Escriba un correo para encontrar un registro de usuarix");
-    const userFindForMail = usersList.filter(user => mail === user[2]);
+const findForMail = (usersList, aMail) => {
+    
+    const userFindForMail = usersList.filter(user => aMail === user[2]);
     if(userFindForMail){
         console.log(userFindForMail);
     } else {
@@ -81,28 +81,19 @@ const actualList = [
     ["joan villanueva", "28", "joan@email.com"],
     ["katia crimson", "27", "katia@email.com"]
 ];
+const mail = prompt("Escriba un correo para encontrar un registro de usuarix");
 
-findForMail(actualList);
+findForMail(actualList, mail);
 
  /***********************************************
  * 4. Hacer una función que me permita encontrar 
  *    personas por nombre o parte del nombre.
  ************************************************/
 
-const findForName = usersList => {
-    const inputName = prompt("Escriba el nombre completo o parte del nombre");
-    
-    const allNames = usersList.map(user => user[0]);
-    console.log(allNames);//nuevo array con los nombres
-
-    const idxFindForName = allnames.findIndex(name => name.indexOf(inputName) !== -1)
-        
-    if(idxFindForName){
-        print = usersList.find(user => user===idxFindForName)
-        console.log[print];
-    }else{
-        console.log("Ningún nombre o parte del nombre de usuarix corresponde con los registrados :(");
-    }   
+const findForName = (usersList, input) => { 
+    const allNames = usersList.map(user => user[0]);//nuevo array con los nombres
+    const idxFindForName = allNames.findIndex(name => name.indexOf(input) !== -1) 
+    console.log(usersList[idxFindForName]);
 }  
 
 const actualList = [
@@ -111,47 +102,41 @@ const actualList = [
     ["katia crimson", "27", "katia@email.com"]
 ];
 
-findForName(actualList);
+const inputName = prompt("Escriba el nombre completo o parte del nombre");
+
+findForName(actualList, inputName);
 
 
 //Y si quiero encontrar TODXS lxs usuarixs que coinciden con el input????
-//Este fue mi intento fallido:
+//Esta fue mi solución
 
-const findForName = usersList => {
-    const inputName = prompt("Escriba el nombre completo o parte del nombre");
-    const findUser = []; //Para guardar todos los nombres de usuarios que coinciden con la búsqueda
-    
-    const allNames = usersList.map(user => user[0]);
+const findForName = (usersList, input) => {
 
-    const indexOfFindName = allNames.findIndex(name => name.indexOf(inputName));
-    console.log(indexOfFindName);
-        
-    if(indexOfFindName!==-1){
-        findUser.push(usersList[indexOfFindName]);
-        console.log(findUser);//
-    }else{
-        console.log("Ningún nombre o parte del nombre de usuario corresponde con los registrados :(");
-    }
+    const findUser = usersList.filter(user => user[0].includes(input));
+
+    console.log(findUser);
 }  
 
 const actualList = [
     ["niko gutierrez", "30", "niko@email.com"],
     ["joan villanueva", "28", "joan@email.com"],
     ["katia crimson", "27", "katia@email.com"],
-    ["joancita"]
+    ["joancita", "28", "joancita@email.com"]
 ];
 
-findForName(actualList);
+const inputName = prompt("Escriba el nombre completo o parte del nombre");
+
+findForName(actualList, inputName);
 
  /***********************************************
  * 5. Hacer una función para borrar personas por mail. / splice
  ************************************************/
-const deleteUser = usersList => {
-    const toDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
+const deleteUser = (usersList, mail) => {
+    const index = usersList.findIndex(user => user[2] === mail);
+    if(index === -1) throw new Error("El email no existe");
+    usersList.splice(index, 1) // le paso el indice del email que quiero eliminar y la cantidad de elementos a eliminar desde ese punto, o sea, 1, un solo email quiero borrar
 
-    const mailToConserve = usersList.filter(user => user[2]!==toDelete);//Este fue el método que me resultó. ¿Cómo se haría con splice??
-     
-    console.log(mailToConserve);
+    console.log(usersList);
  }
  
  const actualList = [
@@ -159,18 +144,52 @@ const deleteUser = usersList => {
     ["joan villanueva", "28", "joan@email.com"],
     ["katia crimson", "27", "katia@email.com"]
  ];
+
+ const mailUsertoDelete = prompt("Escriba el correo registrado de usuarix para eliminarle");
  
- deleteUser(actualList);
- 
+ deleteUser(actualList, mailUsertoDelete);
+
  /***********************************************
  * 6. Hacer una funcion que permita modificar nombre
  *    buscando por mail.
  ************************************************/
 
+const modifyName = (usersList, mail) => {
+    const index = usersList.findIndex(user => user[2] === mail);
+    if(index === -1) throw new Error("El email no existe");
+    usersList[index][0] = prompt("Escriba un nuevo nombre de usuario");
+ }
+
+let actualList = [
+    ["niko gutierrez", "30", "niko@email.com"],
+    ["joan villanueva", "28", "joan@email.com"],
+    ["katia crimson", "27", "katia@email.com"]
+ ];
+
+ const mailUserToChange = prompt("Escriba el correo para cambiar el nombre");
+
+ modifyName(actualList, mailUserToChange);
+
  /***********************************************
  * 7. Hacer una funcion que permita modificar edad 
  *    buscando por mail.
  ************************************************/
+
+const modifyAge = (usersList, mail) => {
+    const index = usersList.findIndex(user => user[2] === mail);
+    if(index === -1) throw new Error("El email no existe");
+    usersList[index][2] = prompt(`Escriba de nuevo la edad de usuarix con correo ${mail}`);
+ }
+
+let actualList = [
+    ["niko gutierrez", "30", "niko@email.com"],
+    ["joan villanueva", "28", "joan@email.com"],
+    ["katia crimson", "27", "katia@email.com"]
+ ];
+
+ const mailUserToChange = prompt("Escriba el correo para cambiar el nombre");
+
+ modifyAge(actualList, mailUserToChange);
 
 /***********************************************
  * Observaciones: 

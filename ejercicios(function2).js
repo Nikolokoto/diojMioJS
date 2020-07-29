@@ -71,4 +71,13 @@ printTitle();
  *  
  ***********************************************/
 
- 
+const printLongestWord = () => {
+    const phrase = prompt("Escriba una frase y le mostraremos cuál es su palabra más larga:");
+    let spelling = phrase.split(' ');
+
+    let longestWord = spelling.reduce((acumulador, word) => (word.length -1) < acumulador, 0);
+
+    console.log(longestWord);
+ }
+
+ printLongestWord();

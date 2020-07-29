@@ -34,27 +34,14 @@ countVowels(input);
  ***********************************************/
 
 const checkCharacter = (character) => {
-    let spelling = character.split('');
-
-    if(spelling.length > 1) {
-        throw new Error ("Sólo se puede borrar un caracter");
-    }else{
-        return checkCharacter;
-    }
+    if(character.length != 1) throw new Error ("Sólo se puede borrar un caracter");
 }
 
 const deleteCharacter = (phrase, toDelete) => {
     checkCharacter(toDelete);
     let charactersPhrase = phrase.split('');
-    let repeatDelete = 0;
-    const newPhrase = [];
-    const searchCharacter = charactersPhrase.map(character=>character!==toDelete)
-        if(searchCharacter===true){
-           newPhrase.push(searchCharacter);
-        }else{
-            repeatDelete++;
-        }
-    console.log(newPhrase.join(''));
+    const filterPhrase = charactersPhrase.filter(character=>character.toLowerCase() !== toDelete.toLowerCase()); // filtro el array nuevo loopeando por caracter. Si el caracter es distinto al que recibi por parametro, lo guardo en mi nuevo array resultante
+    return filterPhrase.join('');
 }
 
 let input = prompt("ELIMINADOR DE CARACTER - 1. Escriba una frase");

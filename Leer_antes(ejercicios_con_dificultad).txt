@@ -1,12 +1,8 @@
+29/07/20·20
+
 Nota:
 
-Lista actualizada (viernes 24 de julio)
-
-11 de array
-
-2 de parametros
-
-5 de integral (en realidad pude hacerlo, pero sin usar el splice. Cómo es con splice?? Lo intenté y no me daba)
+ejercicios(objetos): problema con la función modificar estado.
 
 
-Agradezco alguna luz de lo que estoy haciendo mal. Gracias de antemano, Fede
+Gracias, Fede!

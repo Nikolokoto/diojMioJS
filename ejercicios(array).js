@@ -270,31 +270,18 @@ for(let i=0 ; i<array.length ; i++){
   let floweraAndSeedling = prompt("Ingrese primero alguna flor (girasol, orquidea, clavel, jazmin) y luego sus plántulas");
   const array = floweraAndSeedling.split(' ');
   
-  
-  try{
-      if(array[0]!=="girasol" && array[0]!=="orquidea" && array[0]!=="clavel" && array[0]!=="jazmin"){
-      throw new Error ("No empieza con alguna flor. Nada va a germinar aquí");      
-      } 
-  }catch(err){
-      alert(err);
-  }
-  
+  if(array[0]!=="girasol" && array[0]!=="orquidea" && array[0]!=="clavel" && array[0]!=="jazmin") throw new Error ("No empieza con alguna flor. Nada va a germinar aquí"); 
+
   let germinating = [];
-  let flower = "thatString";
-  let germinatingFlower = "anotherString";
+  let flower;
   
-  for (let i = 0 ; array.length < i ; i++){
-    if(array[i]==="girasol" || array[i]==="orquidea" || array[i]==="clavel" || array[i]==="jazmin"){
-        flower = array[i]
-        console.log(flower);
-        germinating.push(flower);
-    } else {
-       germinating.push(flower); // Aca ya se cual es la planta, porque la ultima vez que la encontre la puse en la variable flower
+  for (let plant of array){
+    if(plant === "girasol" || plant ==="orquidea" || plant ==="clavel" || plant === "jazmin"){
+        flower = plant;
     }
-
-    console.log(germinating);
-}
-
+    germinating.push(flower); // Aca ya se cual es la planta, porque la ultima vez que la encontre la puse en la variable flower
+               }
+    console.log(germinating.join(' '));
 
    // 12
    /**
