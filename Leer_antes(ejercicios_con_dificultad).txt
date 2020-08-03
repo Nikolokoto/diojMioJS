@@ -1,8 +1,14 @@
-29/07/20·20
+03/08/20·20
 
 Nota:
 
-ejercicios(objetos): problema con la función modificar estado.
+*Ya hice mi primer Test. Me fue bien :)
 
+*ejercicios(objetos): Básicamente sólo me salió uno de los tres ejercicios.
+
+	·No logré crear un objeto con "new" a partir de una función arrow (Ejercicio libros y películas).
+
+	·Problema con el getter: no me funciona ni en el ejercicio de los libros ni el de la receta; 
+	y cuando este getter estaba originalmente dentro del objeto receta, me falló el ForEach
 
 Gracias, Fede!

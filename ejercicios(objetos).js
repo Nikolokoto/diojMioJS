@@ -92,44 +92,72 @@ const carrito = {
  * permita agregar nuevas reviews al libro.
  */
 
-const book = {
-    title: "Viajero Solitario",
-    author: "Jack Kerouack",
-    publishYear: 1960,
-    isbn: 881213,
+function Review (criticianName, opinion, value) {
+    this.criticianName = criticianName;
+    this.opinion = opinion;
+
+    const checkValue = (number) => {
+        if(typeof number !== "number") throw new Error("La valoración no es un número");
+        if (number < 0 || this.value > 5) throw new Error("La valoración no se encuentra dentro del rango aceptado");
+    };
+
+    checkValue(value);
+    this.value = value;
+    
+};
+
+function Book (title, author, publishYear, isbn) {
+    this.title = title;
+    this.author = author;
+
+    const checkYear = (number) => {
+        if(typeof number != "number") throw new Error("Debe ser un número!");
+    };
+
+    checkYear(publishYear);
+    this.publishYear = publishYear;
+    this.isbn = isbn;
+    
+    this.reviews = [];
+
+    
+    this.addReview = (user, title, opinion, value) => {
+        const review = new Review(user, title, opinion, value);
+        this.reviews.push(review);
+    },
+
+    this.reviewsAverage = (valuation) {
+            const summation = this.reviews.reduce((acumulator, review) => acumulator + review.value, 0);
+            const valuation = summation/this.reviews.length;
+            return valuation
+    },
 
     get printBook() {
         return `${this.title}, escrito por ${this.author}, publicado en el año ${this.publishYear} (ISBN: ${this.isbn}).`
-    }, 
-
-    reviews: [
-    {
-        name: "Un libro para aventurerxs", 
-        review: "Recomendado para viajerxs e incansables caminantes", 
-        value: 4
-    },
-    {
-        name: "Donde las letras y las vivencias intensas se entrelazan", 
-        review: "Mezcla de autobiografía cruda y una realización de la lengua genuina y radiante", 
-        value: 5
-    },
-    {
-        name: "Escrito por un drogadictx espiritual para vagabundxs de la misma ralea", 
-        review: "La vida según un libertino orgulloso, educado e indingente que no va a ninguna parte", 
-        value: 4
-    }
-    ],
-
-    reviewsAverage: function(value){
-        let summation = this.reviews.reduce((acumulador, review) => acumulador + review[value], 0);
-        return summation/this.reviews.length-1;//Me devuelve NaN :/
-    },
-
-    addReview: function(reviews){
-        const newReview = {};
-        if(newReview = {name, review, value}) reviews.push(newReview);
     }
 };
+
+const Library = () => {
+    const MyLibrary = {
+        books: [];
+    
+        addBook: function (title, author, publishYear, isbn) {
+            this.books.push({
+                title,
+                author,
+                publishYear,
+                isbn
+            });
+        },
+    
+        removeBook: function (title) {
+            this.books = this.books.filter(book => book.title !== title);
+            return this.books;
+        }
+    };
+
+    return MyLibrary
+}
 
 
 /***********************************************
@@ -141,24 +169,55 @@ const book = {
  * 5 gramos de levadura, etc...
  */
 
-const originalRecipe = {//Yiaaaaa
+const PizzaMass = {
     name: "masa de pizza",
+
     ingedients: [
-        {ingredient: "harina", amount: "un kilo"},
-        {ngredient: "agua", amount: "700 ml"},
-        {ingredient: "levadura", amount: "10 g"},
-        {ingredient: "miel", amount: "una cucharilla"},
-        {ingredient: "sal", amount: "20 g"},
-        {ingredient: "aceite de oliva", amount: "50 g"}
-    ],
+            {ingredient: "harina", amount: "un kilo"},
+            {ingredient: "agua", amount: "700 ml"},
+            {ingredient: "levadura", amount: "10 g"},
+            {ingredient: "miel", amount: "una cucharilla"},
+            {ingredient: "sal", amount: "20 g"},
+            {ingredient: "aceite de oliva", amount: "50 g"}
+        ]/*,
 
-    get PizzaMass(){
-        let print = `La receta para hacer ${name} lleva: `;
-        this.ingredients.forEach(ingredient => print += `${ingredient.amount} de ${ingredient.ingredient}, `);
+    get PrintRecipe(){
+        let print = `La receta para hacer ${this.name} lleva: `;
+        this.ingredients.forEach(ingredient => print += `${ingredient.amount} de ${ingredient.ingredient}, `);//Me falló el ForEach
         return printIngredients.substr(0, print.length - 2) + '.';
-    }
-
+    };*/
 };
+
+function Recipe (name, ingredients) {
+    this.name = name;
+    this.ingredients = ingredients;
+};
+
+function RecipesBook (){
+    this.recipes = [];
+        
+    this.addRecipe = (name, ingredients) => {
+        const recipe = new Recipe(name, ingredients);
+        recipesBook.push(recipe);
+    },
+
+    get PrintRecipe () { /*No me funciona :`(*/
+        let print = `La receta para hacer ${this.recipes[0].name} lleva: `;
+        this.recipes[0].ingredients.forEach(ingredient => print += `${ingredient.amount} de ${ingredient.ingredient}, `);//cuando este getter lo tenía relacionado solo con el objeto PizzaMass (el ejercicio original, y con los "this" solo haciendo referencia al objeto original y no al array), me falló el ForEach
+        return printIngredients.substr(0, print.length - 2) + '.';
+    };
+};
+
+//EN CONSOLA
+//undefined
+const foodFaster = new RecipesBook;
+//undefined
+foodFaster.addRecipe(PizzaMass.name, PizzaMass.ingedients);
+//undefined
+foodFaster.recipes
+//[Recipe]0: Recipe {name: "masa de pizza", ingredients: Array(6)}length: 1__proto__: Array(0)
+
+
 
 /*************************************
   * Consigna Clase 46
@@ -167,12 +226,16 @@ const originalRecipe = {//Yiaaaaa
  * array.reduce
  */
 
-
-const printGreaterNumber = (numbersList) => {
-    const greaterNumber = numbersList.reduce((acumulador, number) => number < acumulador, 0);
-
+const printGreaterNumber = numbersList => {
+    const greaterNumber = numbersList.reduce((acumulator, number) => {
+        if(number > acumulator) {
+            acumulator = number;
+        }
+        return acumulator;
+    }, 0);
+    
     console.log(greaterNumber);
- }
+};
 
  numbers = [47, 30, 85, 26, 31, 28, 50]
 
@@ -195,29 +258,34 @@ const printGreaterNumber = (numbersList) => {
   * correspondientes. (`nombre del año tanto, dirigida por quien`)
   */
 
- const filmsUser = () => {
-    const films = {
-        filmList: [],
-
-        addFilm: function(title, director, year, gender, status){
-            this.filmList.push({
-                title,
-                director,
-                year,
-                gender,
-                status
-            });
-        },
-
-        modifyStatus: function(state){//No me funciona :'(
-            this.filmList[film][status]=state;
-        },
-
-        removeFilm: function(toDelete){
-            this.filmList = this.filmList.filter(film => film.title !== toDelete);
+ const filmsAdmin = () => { //La consola me dice que no es una función creadora
+     const userFilm = {
+         filmList: [],
+ 
+         addFilm: function (title, director, year, gender, status) {
+             this.filmList.push({
+                 title,
+                 director,
+                 year,
+                 gender,
+                 status
+                 });
+             },
+ 
+         modifyStatus: function (titleSearched, state) {
+         const film = this.filmsList.find(film => film.title === titleSearched);
+         film.status = state;
+         return film;
+         },
+ 
+         removeFilm: function (titleToDelete) {
+         this.filmList = this.filmList.filter(film => film.title !== titleToDelete);
+         } 
+    
         }
-    };
-    return films;
-}
+        
+        return userFilm;
+ };  
 
-const filmsNiko = filmsUser();
+
+const filmsNiko = new filmsAdmin();
