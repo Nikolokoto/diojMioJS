@@ -132,14 +132,14 @@ function Book (title, author, publishYear, isbn) {
             return valuation
     },
 
-    get printBook() {
+    get printBook() {   //No funciona Get!!
         return `${this.title}, escrito por ${this.author}, publicado en el año ${this.publishYear} (ISBN: ${this.isbn}).`
     }
 };
 
 const Library = () => {
     const MyLibrary = {
-        books: [];
+        books: [],
     
         addBook: function (title, author, publishYear, isbn) {
             this.books.push({
@@ -156,8 +156,19 @@ const Library = () => {
         }
     };
 
-    return MyLibrary
+    return MyLibrary;
 }
+
+//EN CONSOLA
+//undefined
+const nikoBooks = Library();
+//undefined
+nikoBooks
+//{books: Array(0), addBook: ƒ, removeBook: ƒ}
+nikoBooks.addBook("Viajero Solitario", "Jack Kerouac", 1960, 881213);
+//undefined
+nikoBooks.books
+//[{…}]0: {title: "Viajero Solitario", author: "Jack Kerouac", publishYear: 1960, isbn: 881213}length: 1__proto__: Array(0)
 
 
 /***********************************************
@@ -217,8 +228,6 @@ foodFaster.addRecipe(PizzaMass.name, PizzaMass.ingedients);
 foodFaster.recipes
 //[Recipe]0: Recipe {name: "masa de pizza", ingredients: Array(6)}length: 1__proto__: Array(0)
 
-
-
 /*************************************
   * Consigna Clase 46
   * Escribir una función que reciba un array
@@ -227,20 +236,19 @@ foodFaster.recipes
  */
 
 const printGreaterNumber = numbersList => {
-    const greaterNumber = numbersList.reduce((acumulator, number) => {
-        if(number > acumulator) {
-            acumulator = number;
-        }
-        return acumulator;
-    }, 0);
-    
-    console.log(greaterNumber);
+const greaterNumber = numbersList.reduce((acumulator, number) => {
+    if(number > acumulator) {
+        acumulator = number;
+    }
+    return acumulator;
+}, 0);
+
+console.log(greaterNumber);
 };
 
- numbers = [47, 30, 85, 26, 31, 28, 50]
+numbers = [47, 30, 85, 26, 31, 28, 50]
 
- printGreaterNumber(numbers);
-
+printGreaterNumber(numbers);
 
  /*************************************
   * Crear una funcion que me devuelva un objeto
@@ -258,34 +266,36 @@ const printGreaterNumber = numbersList => {
   * correspondientes. (`nombre del año tanto, dirigida por quien`)
   */
 
- const filmsAdmin = () => { //La consola me dice que no es una función creadora
-     const userFilm = {
-         filmList: [],
- 
-         addFilm: function (title, director, year, gender, status) {
-             this.filmList.push({
-                 title,
-                 director,
-                 year,
-                 gender,
-                 status
-                 });
-             },
- 
-         modifyStatus: function (titleSearched, state) {
-         const film = this.filmsList.find(film => film.title === titleSearched);
-         film.status = state;
-         return film;
-         },
- 
-         removeFilm: function (titleToDelete) {
-         this.filmList = this.filmList.filter(film => film.title !== titleToDelete);
-         } 
-    
-        }
-        
-        return userFilm;
- };  
+function filmsAdmin () { //La consola me dice que no es una función creadora
+    this.filmList = [],
 
+    this.addFilm = (title, director, year, gender, status) => {
+        this.filmList.push({
+            title,
+            director,
+            year,
+            gender,
+            status
+        });
+    },
 
+    this.modifyStatus = (titleSearched, state) => {
+        const film = this.filmsList.find(film => film.title === titleSearched);
+        film["status"] = state;
+        return film;
+    },
+
+    this.removeFilm = (titleToDelete) => {
+        this.filmList = this.filmList.filter(film => film.title !== titleToDelete);
+    }
+
+}
+
+//EN CONSOLA
+//undefined
 const filmsNiko = new filmsAdmin();
+//undefined
+filmsNiko.addFilm("Buenos modales", "Dos brasileiros", 2000, "Fantasía darks", "vista");
+//undefined
+filmsNiko.filmList
+//[{…}]0: {title: "Buenos modales", director: "Dos brasileiros", year: 2000, gender: "Fantasía darks", status: "vista"}length: 1__proto__: Array(0)
